@@ -101,7 +101,50 @@ export class StartupService {
             shortcutRoot: true
           }
         ]
-      }
+      },
+      {
+        text: '内容',
+        group: true,
+        children: [
+          {
+            text: '文章列表',
+            link: '/posts',
+            icon: { type: 'icon', value: 'file' }
+          },
+          {
+            text: '分类',
+            link: '/categories',
+            icon: { type: 'icon', value: 'hdd' }
+          },
+          {
+            text: '标签',
+            link: '/tags',
+            icon: { type: 'icon', value: 'tags' }
+          },
+        ]
+      },
+      {
+        text: '用户',
+        group: true,
+        children: [
+          {
+            text: '管理员',
+            link: '/auser',
+            icon: { type: 'icon', value: 'user' }
+          },
+        ]
+      },
+      {
+        text: '其他',
+        group: true,
+        children: [
+          {
+            text: '友情链接',
+            link: '/blogroll',
+            icon: { type: 'icon', value: 'link' }
+          },
+        ]
+      },
     ]);
     // 设置页面标题的后缀
     this.titleService.suffix = app.name;
