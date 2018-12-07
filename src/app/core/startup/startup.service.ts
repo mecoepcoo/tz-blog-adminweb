@@ -143,6 +143,11 @@ export class StartupService {
             link: '/blogroll',
             icon: { type: 'icon', value: 'link' }
           },
+          {
+            text: '工具箱',
+            link: '/toolbox',
+            icon: { type: 'icon', value: 'inbox' }
+          },
         ]
       },
     ]);
