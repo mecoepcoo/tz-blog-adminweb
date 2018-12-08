@@ -28,7 +28,11 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘', titleI18n: 'dashboard' } },
       // 业务子模块
-      { path: 'category', loadChildren: './category/category.module#CategoryModule' }
+      { path: 'category', loadChildren: './category/category.module#CategoryModule' },
+      { path: 'tag', loadChildren: './tag/tag.module#TagModule' },
+      { path: 'auser', loadChildren: './auser/auser.module#AuserModule' },
+      { path: 'blogroll', loadChildren: './blogroll/blogroll.module#BlogrollModule' },
+      { path: 'toolbox', loadChildren: './toolbox/toolbox.module#ToolboxModule' },
     ]
   },
   // 全屏布局
