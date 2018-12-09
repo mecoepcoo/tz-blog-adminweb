@@ -108,17 +108,17 @@ export class StartupService {
         children: [
           {
             text: '文章列表',
-            link: '/posts',
+            link: '/post',
             icon: { type: 'icon', value: 'file' }
           },
           {
             text: '分类',
-            link: '/categories',
+            link: '/category',
             icon: { type: 'icon', value: 'hdd' }
           },
           {
             text: '标签',
-            link: '/tags',
+            link: '/tag',
             icon: { type: 'icon', value: 'tags' }
           },
         ]

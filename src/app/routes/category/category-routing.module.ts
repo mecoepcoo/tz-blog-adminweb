@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CategoryCategoryComponent } from './category/category.component';
 
 const routes: Routes = [
-];
+
+  { path: 'category', component: CategoryCategoryComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
