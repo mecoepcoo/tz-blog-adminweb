@@ -4,10 +4,10 @@ import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 
 @Component({
-  selector: 'app-category-category-edit',
+  selector: 'app-category-list-edit',
   templateUrl: './edit.component.html',
 })
-export class CategoryCategoryEditComponent implements OnInit {
+export class CategoryListEditComponent implements OnInit {
   record: any = {};
   i: any;
   schema: SFSchema = {

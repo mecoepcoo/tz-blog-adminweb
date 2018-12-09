@@ -3,10 +3,10 @@ import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 
 @Component({
-  selector: 'app-category-category-view',
+  selector: 'app-category-list-view',
   templateUrl: './view.component.html',
 })
-export class CategoryCategoryViewComponent implements OnInit {
+export class CategoryListViewComponent implements OnInit {
   record: any = {};
   i: any;
 

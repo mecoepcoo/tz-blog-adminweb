@@ -2,32 +2,41 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
+import { CategoryListEditComponent } from './edit/edit.component';
 
 @Component({
-  selector: 'app-category-category',
-  templateUrl: './category.component.html',
+  selector: 'app-category-list',
+  templateUrl: './list.component.html',
 })
-export class CategoryCategoryComponent implements OnInit {
+export class CategoryListComponent implements OnInit {
   url = `/user`;
   searchSchema: SFSchema = {
     properties: {
       no: {
         type: 'string',
-        title: '编号'
+        title: 'id'
       }
     }
   };
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
-    { title: '编号', index: 'no' },
+    { title: 'id', index: 'no' },
     { title: '调用次数', type: 'number', index: 'callNo' },
     { title: '头像', type: 'img', width: '50px', index: 'avatar' },
     { title: '时间', type: 'date', index: 'updatedAt' },
     {
-      title: '',
+      title: '操作',
       buttons: [
-        // { text: '查看', click: (item: any) => `/form/${item.id}` },
-        // { text: '编辑', type: 'static', component: FormEditComponent, click: 'reload' },
+        { text: '查看', click: (item: any) => `/form/${item.id}` },
+        { 
+          text: '编辑',
+          icon: 'edit',
+          type: 'modal',
+          modal: {
+            component: CategoryListEditComponent,
+          },
+          click: (record: any, modal: any) => console.log('点击了编辑')
+        },
       ]
     }
   ];

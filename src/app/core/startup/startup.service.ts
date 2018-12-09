@@ -95,11 +95,11 @@ export class StartupService {
             link: '/dashboard',
             icon: { type: 'icon', value: 'appstore' }
           },
-          {
+          /* {
             text: '快捷菜单',
             icon: { type: 'icon', value: 'rocket' },
             shortcutRoot: true
-          }
+          } */
         ]
       },
       {

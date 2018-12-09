@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { CategoryRoutingModule } from './category-routing.module';
-import { CategoryCategoryComponent } from './category/category.component';
-import { CategoryCategoryEditComponent } from './category/edit/edit.component';
-import { CategoryCategoryViewComponent } from './category/view/view.component';
+import { CategoryListComponent } from './list/list.component';
+import { CategoryListEditComponent } from './list/edit/edit.component';
+import { CategoryListViewComponent } from './list/view/view.component';
 
 const COMPONENTS = [
-  CategoryCategoryComponent];
+  CategoryListComponent];
 const COMPONENTS_NOROUNT = [
-  CategoryCategoryEditComponent,
-  CategoryCategoryViewComponent];
+  CategoryListEditComponent,
+  CategoryListViewComponent];
 
 @NgModule({
   imports: [

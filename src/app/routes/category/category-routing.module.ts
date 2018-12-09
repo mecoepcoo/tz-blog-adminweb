@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CategoryCategoryComponent } from './category/category.component';
+import { CategoryListComponent } from './list/list.component';
 
 const routes: Routes = [
-
-  { path: 'category', component: CategoryCategoryComponent }];
+  { path: 'list', component: CategoryListComponent },
+  { path: '', redirectTo: 'list' }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
