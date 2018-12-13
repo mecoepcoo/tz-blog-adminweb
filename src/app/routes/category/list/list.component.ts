@@ -3,6 +3,7 @@ import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { CategoryListEditComponent } from './edit/edit.component';
+import { CategoryListViewComponent } from './view/view.component';
 
 @Component({
   selector: 'app-category-list',
@@ -20,14 +21,21 @@ export class CategoryListComponent implements OnInit {
   };
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
-    { title: 'id', index: 'no' },
-    { title: '调用次数', type: 'number', index: 'callNo' },
-    { title: '头像', type: 'img', width: '50px', index: 'avatar' },
-    { title: '时间', type: 'date', index: 'updatedAt' },
+    { title: 'id', index: 'no', width: '200px' },
+    { title: '名称' },
+    { title: '数量', type: 'number', sort: true, width: '200px' },
     {
       title: '操作',
       buttons: [
-        { text: '查看', click: (item: any) => `/form/${item.id}` },
+        { 
+          text: '查看',
+          icon: 'eye',
+          type: 'modal',
+          modal: {
+            component: CategoryListViewComponent,
+          },
+          click: (record: any, modal: any) => console.log('点击了查看', record, modal)
+        },
         { 
           text: '编辑',
           icon: 'edit',
