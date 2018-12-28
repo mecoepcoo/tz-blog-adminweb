@@ -1,9 +1,9 @@
-<page-header>
-  <ng-template #action>
-    <button (click)="add()" nz-button nzType="primary">新建</button>
-  </ng-template>
-</page-header>
+<page-header [title]="'分类'"></page-header>
 <nz-card>
   <sf mode="search" [schema]="searchSchema" (formSubmit)="search($event)" (formReset)="reset($event)"></sf>
+  <button nz-button (click)="add(modalContent)" [nzType]="'primary'">
+    <i nz-icon type="plus"></i>
+    <span>新建</span>
+  </button>
   <st #st [data]="list" [total]="total" [pi]="page" [ps]="size" [loading]="loading" [columns]="columns" [page]="{front: false, showSize: true, showQuickJumper: true, zeroIndexed: false}" (change)="change($event)"></st>
 </nz-card>

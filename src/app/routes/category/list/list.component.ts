@@ -62,8 +62,12 @@ export class CategoryListComponent implements OnInit {
           icon: 'delete',
           type: 'del',
           click: (record, modal, comp) => {
-            this.message.success(`成功删除【${record.name}】`);
-            comp.removeRow(record);
+            this._categoryService.delCategory(record.id)
+              .subscribe(res => {
+                console.log(res);
+                this.message.success(`成功删除【${record.name}】`);
+                comp.removeRow(record);
+              })
           }
         },
       ]
@@ -125,5 +129,4 @@ export class CategoryListComponent implements OnInit {
       console.log(error);
     });
   }
-
 }

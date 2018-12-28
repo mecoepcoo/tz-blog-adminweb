@@ -3,8 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { CategoryListComponent } from './list/list.component';
 
 const routes: Routes = [
-  { path: 'list', component: CategoryListComponent },
-  { path: '', redirectTo: 'list' },
+  {
+    path: 'list',
+    component: CategoryListComponent,
+    data: { title: '分类' },
+  },
+  {
+    path: '',
+    redirectTo: 'list',
+  },
 ];
 
 @NgModule({
