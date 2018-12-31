@@ -6,6 +6,12 @@
       "node"
     ],
     "paths": {
+      "@app": [
+        "app"
+      ],
+      "@app/*": [
+        "app/*"
+      ],
       "@shared": [
         "app/shared"
       ],
@@ -29,6 +35,9 @@
       ],
       "@env/*": [
         "environments/*"
+      ],
+      "@interfaces": [
+        "app/interfaces"
       ]
     },
     "baseUrl": "./"
