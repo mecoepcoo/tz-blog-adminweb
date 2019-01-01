@@ -16,9 +16,14 @@ import { ICategory } from '@interfaces/category';
 })
 export class CategoryListComponent implements OnInit {
   list: ICategory[] = [];
+  total: number = 0;
+  page: number = 1;
+  size: number = 10;
+  loading: boolean = false;
+
   searchSchema: SFSchema = {
     properties: {
-      no: {
+      id: {
         type: 'string',
         title: 'id'
       }
@@ -54,6 +59,26 @@ export class CategoryListComponent implements OnInit {
     }
   ];
 
+  init() {
+    this.getList();
+  }
+
+  change(e) {
+    this.loading = true;
+    this.page = e.pi;
+    this.size = e.ps;
+    this.getList(this.page, this.size);
+  }
+
+  search(e) {
+    console.log(e);
+  }
+
+  reset(e) {
+    console.log(e);
+    this.init();
+  }
+
   constructor(
     private http: _HttpClient,
     private modal: ModalHelper,
@@ -61,7 +86,7 @@ export class CategoryListComponent implements OnInit {
   ) { }
 
   ngOnInit() { 
-    this.getCategoryList();
+    this.init();
   }
 
   add() {
@@ -70,11 +95,13 @@ export class CategoryListComponent implements OnInit {
     //   .subscribe(() => this.st.reload());
   }
 
-  getCategoryList() {
-    return this._categoryService.getCategoryList(1, 10).subscribe(res => {
+  getList(page = 1, size = 10) {
+    return this._categoryService.getCategoryList(page, size).subscribe(res => {
       console.log(res);
       let data = res.data;
       this.list = data.rows;
+      this.total = data.count;
+      this.loading = false;
     }, error => {
       console.log(error);
     });
