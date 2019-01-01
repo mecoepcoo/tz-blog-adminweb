@@ -36,9 +36,18 @@
       "@env/*": [
         "environments/*"
       ],
+      "@config": [
+        "app/config"
+      ],
+      "@config/*": [
+        "app/config/*"
+      ],
       "@interfaces": [
         "app/interfaces"
-      ]
+      ],
+      "@interfaces/*": [
+        "app/interfaces/*"
+      ],
     },
     "baseUrl": "./"
   },
