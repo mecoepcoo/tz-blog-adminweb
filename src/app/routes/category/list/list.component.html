@@ -5,5 +5,5 @@
 </page-header>
 <nz-card>
   <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
-  <st #st [data]="list" [columns]="columns"></st>
+  <st #st [data]="list" [columns]="columns" [page]="{front: false, showSize: true, showQuickJumper: true, total: true}"></st>
 </nz-card>

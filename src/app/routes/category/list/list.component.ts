@@ -71,7 +71,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   getCategoryList() {
-    return this._categoryService.getCategoryList().subscribe(res => {
+    return this._categoryService.getCategoryList(1, 10).subscribe(res => {
       console.log(res);
       let data = res.data;
       this.list = data.rows;

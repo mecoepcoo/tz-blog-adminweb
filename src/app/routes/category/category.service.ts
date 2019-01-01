@@ -13,7 +13,7 @@ export class CategoryService {
 
   /* 获取分类列表 */
   getCategoryList(page = 1, size = 10): Observable<IResponse> {
-    let url = `${Config.apiUrl}categories`;
+    let url = `${Config.apiUrl}categories?page=${page}&size=${size}`;
     return this.http.get(url);
   }
 }
