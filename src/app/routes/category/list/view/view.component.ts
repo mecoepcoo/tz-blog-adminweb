@@ -18,7 +18,6 @@ export class CategoryListViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
-    // this.http.get(`/user/${this.record.id}`).subscribe(res => this.i = res);
   }
 
   getData() {

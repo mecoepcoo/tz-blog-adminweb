@@ -41,19 +41,9 @@ export class CategoryListComponent implements OnInit {
           type: 'modal',
           modal: {
             component: CategoryListViewComponent,
-            params: record => {
-              console.log(record)
-              return record
-            },
+            params: record => record,
             paramsName: 'record',
           },
-          click: (record: any, modal: any) => {
-            console.log('点击了查看', record, modal)
-            return this.message.success(
-              `重新加载页面，回传值：${JSON.stringify(modal)}`,
-            )
-          }
-          // click: (record: any, modal: any) => console.log('点击了查看', record, modal)
         },
         { 
           text: '编辑',
@@ -61,8 +51,9 @@ export class CategoryListComponent implements OnInit {
           type: 'modal',
           modal: {
             component: CategoryListEditComponent,
+            params: record => record,
+            paramsName: 'record',
           },
-          click: (record: any, modal: any) => console.log('点击了编辑')
         },
       ]
     }

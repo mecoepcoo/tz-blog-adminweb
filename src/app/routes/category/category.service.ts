@@ -22,4 +22,26 @@ export class CategoryService {
     let url = `${Config.apiUrl}categories/${id}`;
     return this.http.get(url);
   }
+
+  /* 新增分类 */
+  addCategory(name): Observable<IResponse> {
+    let url = `${Config.apiUrl}categories`;
+    return this.http.post(url, {
+      name: name,
+    });
+  }
+
+  /* 修改分类 */
+  editCategory(id, name): Observable<IResponse> {
+    let url = `${Config.apiUrl}categories/${id}`;
+    return this.http.put(url, {
+      name: name,
+    });
+  }
+
+  /* 删除分类 */
+  delCategory(id): Observable<IResponse> {
+    let url = `${Config.apiUrl}categories/${id}`;
+    return this.http.delete(url);
+  }
 }
