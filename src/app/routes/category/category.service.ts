@@ -16,4 +16,10 @@ export class CategoryService {
     let url = `${Config.apiUrl}categories?page=${page}&size=${size}`;
     return this.http.get(url);
   }
+
+  /* 获取分类 */
+  getCategory(id: number | string): Observable<IResponse> {
+    let url = `${Config.apiUrl}categories/${id}`;
+    return this.http.get(url);
+  }
 }

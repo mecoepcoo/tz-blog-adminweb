@@ -5,6 +5,8 @@ import { CategoryListComponent } from './list/list.component';
 import { CategoryListEditComponent } from './list/edit/edit.component';
 import { CategoryListViewComponent } from './list/view/view.component';
 
+import { CategoryService } from './category.service';
+
 const COMPONENTS = [
   CategoryListComponent];
 const COMPONENTS_NOROUNT = [
@@ -19,6 +21,9 @@ const COMPONENTS_NOROUNT = [
   declarations: [
     ...COMPONENTS,
     ...COMPONENTS_NOROUNT
+  ],
+  providers: [
+    CategoryService,
   ],
   entryComponents: COMPONENTS_NOROUNT
 })

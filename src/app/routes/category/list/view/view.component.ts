@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
-import { _HttpClient } from '@delon/theme';
+import { CategoryService } from '../../category.service';
 
 @Component({
   selector: 'app-category-list-view',
@@ -8,16 +8,21 @@ import { _HttpClient } from '@delon/theme';
 })
 export class CategoryListViewComponent implements OnInit {
   record: any = {};
-  i: any;
+  data: any;
 
   constructor(
     private modal: NzModalRef,
     public msgSrv: NzMessageService,
-    public http: _HttpClient
+    private _categoryService: CategoryService,
   ) { }
 
   ngOnInit(): void {
-    this.http.get(`/user/${this.record.id}`).subscribe(res => this.i = res);
+    this.getData();
+    // this.http.get(`/user/${this.record.id}`).subscribe(res => this.i = res);
+  }
+
+  getData() {
+    this._categoryService.getCategory(this.record.id).subscribe(res => this.data = res.data);
   }
 
   close() {

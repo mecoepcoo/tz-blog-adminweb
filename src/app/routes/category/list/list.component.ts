@@ -6,26 +6,24 @@ import { CategoryListEditComponent } from './edit/edit.component';
 import { CategoryListViewComponent } from './view/view.component';
 import { CategoryService } from '../category.service';
 import { ICategory } from '@interfaces/category';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './list.component.html',
-  providers: [
-    CategoryService,
-  ],
 })
 export class CategoryListComponent implements OnInit {
-  list: ICategory[] = [];
+  list: ICategory[];
   total: number = 0;
   page: number = 1;
   size: number = 10;
-  loading: boolean = false;
+  loading: boolean = true;
 
   searchSchema: SFSchema = {
     properties: {
-      id: {
+      name: {
         type: 'string',
-        title: 'id'
+        title: '名称'
       }
     }
   };
@@ -43,8 +41,19 @@ export class CategoryListComponent implements OnInit {
           type: 'modal',
           modal: {
             component: CategoryListViewComponent,
+            params: record => {
+              console.log(record)
+              return record
+            },
+            paramsName: 'record',
           },
-          click: (record: any, modal: any) => console.log('点击了查看', record, modal)
+          click: (record: any, modal: any) => {
+            console.log('点击了查看', record, modal)
+            return this.message.success(
+              `重新加载页面，回传值：${JSON.stringify(modal)}`,
+            )
+          }
+          // click: (record: any, modal: any) => console.log('点击了查看', record, modal)
         },
         { 
           text: '编辑',
@@ -60,14 +69,17 @@ export class CategoryListComponent implements OnInit {
   ];
 
   init() {
+    this.loading = true;
     this.getList();
   }
 
   change(e) {
-    this.loading = true;
-    this.page = e.pi;
-    this.size = e.ps;
-    this.getList(this.page, this.size);
+    if (e.type == 'pi' || e.type == 'ps') {
+      this.loading = true;
+      this.page = e.pi;
+      this.size = e.ps;
+      this.getList(this.page, this.size);
+    }
   }
 
   search(e) {
@@ -83,6 +95,7 @@ export class CategoryListComponent implements OnInit {
     private http: _HttpClient,
     private modal: ModalHelper,
     private _categoryService: CategoryService,
+    private message: NzMessageService,
   ) { }
 
   ngOnInit() { 
