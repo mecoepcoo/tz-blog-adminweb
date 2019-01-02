@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
+import { STColumn, STComponent, STData } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { CategoryListEditComponent } from './edit/edit.component';
 import { CategoryListViewComponent } from './view/view.component';
@@ -54,6 +54,17 @@ export class CategoryListComponent implements OnInit {
             params: record => record,
             paramsName: 'record',
           },
+          click: (record: STData) => {
+            this.refresh();
+          }
+        },
+        { 
+          icon: 'delete',
+          type: 'del',
+          click: (record, modal, comp) => {
+            this.message.success(`成功删除【${record.name}】`);
+            comp.removeRow(record);
+          }
         },
       ]
     }
@@ -62,6 +73,10 @@ export class CategoryListComponent implements OnInit {
   init() {
     this.loading = true;
     this.getList();
+  }
+
+  refresh() {
+    this.getList(this.page, this.size);
   }
 
   change(e) {

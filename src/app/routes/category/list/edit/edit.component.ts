@@ -3,6 +3,8 @@ import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 
+import { CategoryService } from "../../category.service";
+
 @Component({
   selector: 'app-category-list-edit',
   templateUrl: './edit.component.html',
@@ -13,7 +15,7 @@ export class CategoryListEditComponent implements OnInit {
   schema: SFSchema = {
     properties: {
       id: { type: 'string', title: 'id', readOnly: true },
-      post_count: {type: 'number', title: '文章数', readOnly: true },
+      post_count: {type: 'number', title: '文章数' },
       name: { type: 'string', title: '名称', maxLength: 15 },
     },
     required: ['name'],
@@ -23,15 +25,14 @@ export class CategoryListEditComponent implements OnInit {
       spanLabelFixed: 100,
       grid: { span: 12 },
     },
-    $no: {
+    $id: {
       widget: 'text'
     },
-    $href: {
-      widget: 'string',
+    $post_count: {
+      widget: 'text',
     },
-    $description: {
-      widget: 'textarea',
-      grid: { span: 24 },
+    $name: {
+      widget: 'string',
     },
   };
 
@@ -39,6 +40,7 @@ export class CategoryListEditComponent implements OnInit {
     private modal: NzModalRef,
     private msgSrv: NzMessageService,
     public http: _HttpClient,
+    private _categoryService: CategoryService,
   ) {}
 
   ngOnInit(): void {
@@ -47,10 +49,12 @@ export class CategoryListEditComponent implements OnInit {
   }
 
   save(value: any) {
-    this.http.post(`/user/${this.record.id}`, value).subscribe(res => {
-      this.msgSrv.success('保存成功');
-      this.modal.close(true);
-    });
+    this._categoryService.editCategory(this.data.id, value.name)
+      .subscribe(res => {
+        console.log(res);
+        this.msgSrv.success('保存成功');
+        this.modal.close(true);
+      });
   }
 
   close() {
