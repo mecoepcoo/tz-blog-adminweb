@@ -1,7 +1,7 @@
 <page-header [title]="'分类'"></page-header>
 <nz-card>
   <sf mode="search" [schema]="searchSchema" (formSubmit)="search($event)" (formReset)="reset($event)"></sf>
-  <button nz-button (click)="add(modalContent)" [nzType]="'primary'">
+  <button nz-button (click)="add()" [nzType]="'primary'">
     <i nz-icon type="plus"></i>
     <span>新建</span>
   </button>

@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent, STData } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { CategoryListEditComponent } from './edit/edit.component';
 import { CategoryListViewComponent } from './view/view.component';
+import { CategoryListAddComponent } from "./add/add.component";
 import { CategoryService } from '../category.service';
 import { ICategory } from '@interfaces/category';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -113,9 +114,9 @@ export class CategoryListComponent implements OnInit {
   }
 
   add() {
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
+    this.modal
+      .createStatic(CategoryListAddComponent, { record: { id: 0 } })
+      .subscribe(() => this.st.reload());
   }
 
   getList(page = 1, size = 10) {

@@ -4,6 +4,7 @@ import { CategoryRoutingModule } from './category-routing.module';
 import { CategoryListComponent } from './list/list.component';
 import { CategoryListEditComponent } from './list/edit/edit.component';
 import { CategoryListViewComponent } from './list/view/view.component';
+import { CategoryListAddComponent } from "./list/add/add.component";
 
 import { CategoryService } from './category.service';
 
@@ -11,7 +12,8 @@ const COMPONENTS = [
   CategoryListComponent];
 const COMPONENTS_NOROUNT = [
   CategoryListEditComponent,
-  CategoryListViewComponent];
+  CategoryListViewComponent,
+  CategoryListAddComponent];
 
 @NgModule({
   imports: [
