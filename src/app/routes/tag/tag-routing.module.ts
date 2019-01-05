@@ -3,8 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { TagListComponent } from './list/list.component';
 
 const routes: Routes = [
-  { path: 'list', component: TagListComponent },
-  { path: '', redirectTo: 'list' },  
+  {
+    path: 'list',
+    component: TagListComponent,
+    data: { title: '标签' },
+  },
+  {
+    path: '',
+    redirectTo: 'list'
+  },  
 ];
 
 @NgModule({
