@@ -44,14 +44,12 @@ export class CategoryListEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.record);
     this.data = this.record;
   }
 
   save(value: any) {
     this._categoryService.editCategory(this.data.id, value.name)
       .subscribe(res => {
-        console.log(res);
         this.msgSrv.success('保存成功');
         this.modal.close(true);
       });

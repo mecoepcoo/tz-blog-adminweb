@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
+import { TagService } from '../../tag.service';
 
 @Component({
   selector: 'app-tag-list-edit',
@@ -9,31 +10,28 @@ import { SFSchema, SFUISchema } from '@delon/form';
 })
 export class TagListEditComponent implements OnInit {
   record: any = {};
-  i: any;
+  data: any;
   schema: SFSchema = {
     properties: {
-      no: { type: 'string', title: '编号' },
-      owner: { type: 'string', title: '姓名', maxLength: 15 },
-      callNo: { type: 'number', title: '调用次数' },
-      href: { type: 'string', title: '链接', format: 'uri' },
-      description: { type: 'string', title: '描述', maxLength: 140 },
+      id: { type: 'string', title: 'id', readOnly: true },
+      post_count: {type: 'number', title: '文章数' },
+      name: { type: 'string', title: '名称', maxLength: 15 },
     },
-    required: ['owner', 'callNo', 'href', 'description'],
+    required: ['name'],
   };
   ui: SFUISchema = {
     '*': {
       spanLabelFixed: 100,
       grid: { span: 12 },
     },
-    $no: {
+    $id: {
       widget: 'text'
     },
-    $href: {
-      widget: 'string',
+    $post_count: {
+      widget: 'text',
     },
-    $description: {
-      widget: 'textarea',
-      grid: { span: 24 },
+    $name: {
+      widget: 'string',
     },
   };
 
@@ -41,18 +39,19 @@ export class TagListEditComponent implements OnInit {
     private modal: NzModalRef,
     private msgSrv: NzMessageService,
     public http: _HttpClient,
+    private _tagService: TagService,
   ) {}
 
   ngOnInit(): void {
-    if (this.record.id > 0)
-    this.http.get(`/user/${this.record.id}`).subscribe(res => (this.i = res));
+    this.data = this.record;
   }
 
   save(value: any) {
-    this.http.post(`/user/${this.record.id}`, value).subscribe(res => {
-      this.msgSrv.success('保存成功');
-      this.modal.close(true);
-    });
+    this._tagService.editTag(this.data.id, value.name)
+      .subscribe(res => {
+        this.msgSrv.success('保存成功');
+        this.modal.close(true);
+      });
   }
 
   close() {

@@ -47,7 +47,6 @@ export class CategoryListAddComponent implements OnInit {
   save(value: any) {
     this._categoryService.addCategory(value.name)
       .subscribe(res => {
-        console.log(res);
         this.msgSrv.success('新建成功');
         this.modal.close(true);
       });
