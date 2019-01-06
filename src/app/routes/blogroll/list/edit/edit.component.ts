@@ -15,7 +15,7 @@ export class BlogrollListEditComponent implements OnInit {
     properties: {
       id: { type: 'string', title: 'id', readOnly: true },
       name: { type: 'string', title: '名称', maxLength: 15 },
-      url: {type: 'string', title: '链接', pattern: '/^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i' },
+      url: {type: 'string', title: '链接', pattern: '^https?:\/\/' },
     },
     required: ['name', 'url'],
   };
@@ -25,7 +25,8 @@ export class BlogrollListEditComponent implements OnInit {
       grid: { span: 12 },
     },
     $id: {
-      widget: 'text'
+      widget: 'text',
+      grid: { span: 24 },
     },
     $name: {
       widget: 'string',

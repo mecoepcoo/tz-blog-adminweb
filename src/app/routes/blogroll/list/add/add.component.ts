@@ -14,7 +14,7 @@ export class BlogrollListAddComponent implements OnInit {
   schema: SFSchema = {
     properties: {
       name: { type: 'string', title: '名称', maxLength: 15 },
-      url: {type: 'string', title: '链接', pattern: '/^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i' },
+      url: {type: 'string', title: '链接', pattern: '^https?:\/\/' },
     },
     required: ['name', 'url'],
   };
