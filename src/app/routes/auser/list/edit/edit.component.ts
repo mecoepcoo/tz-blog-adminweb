@@ -3,22 +3,23 @@ import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 
-import { CategoryService } from "../../category.service";
+import { AuserService } from "../../auser.service";
 
 @Component({
-  selector: 'app-category-list-edit',
+  selector: 'app-auser-list-edit',
   templateUrl: './edit.component.html',
 })
-export class CategoryListEditComponent implements OnInit {
+export class AuserListEditComponent implements OnInit {
   record: any = {};
   data: any;
   schema: SFSchema = {
     properties: {
       id: { type: 'string', title: 'id', readOnly: true },
-      post_count: {type: 'number', title: '文章数' },
-      name: { type: 'string', title: '名称', maxLength: 15 },
+      userName: { type: 'string', title: '用户名', readOnly: true },
+      originPwd: { type: 'string', title: '原密码' },
+      newPwd: {type: 'string', title: '新密码' },
     },
-    required: ['name'],
+    required: ['password'],
   };
   ui: SFUISchema = {
     '*': {
@@ -28,11 +29,14 @@ export class CategoryListEditComponent implements OnInit {
     $id: {
       widget: 'text'
     },
-    $post_count: {
+    $userName: {
       widget: 'text',
     },
-    $name: {
-      widget: 'string',
+    $originPwd: {
+      widget: 'password',
+    },
+    $newPwd: {
+      widget: 'password',
     },
   };
 
@@ -40,7 +44,7 @@ export class CategoryListEditComponent implements OnInit {
     private modal: NzModalRef,
     private msgSrv: NzMessageService,
     public http: _HttpClient,
-    private _categoryService: CategoryService,
+    private _auserService: AuserService,
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +52,7 @@ export class CategoryListEditComponent implements OnInit {
   }
 
   save(value: any) {
-    this._categoryService.editCategory(this.data.id, value.name)
+    this._auserService.editPwd(this.data.id, value.name)
       .subscribe(res => {
         this.msgSrv.success('保存成功');
         this.modal.close(true);

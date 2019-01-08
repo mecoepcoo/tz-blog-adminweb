@@ -31,8 +31,8 @@ export class AuserService {
     });
   }
 
-  /* 修改管理员 */
-  editAuser(id, name): Observable<IResponse> {
+  /* 修改管理员密码 */
+  editPwd(id, name): Observable<IResponse> {
     let url = `${Config.apiUrl}ausers/${id}`;
     return this.http.put(url, {
       name: name,
