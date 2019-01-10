@@ -3,13 +3,13 @@ import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 
-import { CategoryService } from "../../category.service";
+import { AuserService } from "../../auser.service";
 
 @Component({
   selector: 'app-category-list-add',
   templateUrl: './add.component.html',
 })
-export class CategoryListAddComponent implements OnInit {
+export class AuserListAddComponent implements OnInit {
   record: any = {};
   data: any;
   schema: SFSchema = {
@@ -36,7 +36,7 @@ export class CategoryListAddComponent implements OnInit {
     private modal: NzModalRef,
     private msgSrv: NzMessageService,
     public http: _HttpClient,
-    private _categoryService: CategoryService,
+    private _auserService: AuserService,
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +45,7 @@ export class CategoryListAddComponent implements OnInit {
   }
 
   save(value: any) {
-    this._categoryService.addCategory(value.name)
+    this._auserService.addAuser(value.name)
       .subscribe(res => {
         this.msgSrv.success('新建成功');
         this.modal.close(true);

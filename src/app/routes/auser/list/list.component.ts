@@ -2,19 +2,18 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent, STData } from '@delon/abc';
 import { SFSchema } from '@delon/form';
-import { CategoryListEditComponent } from './edit/edit.component';
-import { CategoryListViewComponent } from './view/view.component';
-import { CategoryListAddComponent } from "./add/add.component";
-import { CategoryService } from '../category.service';
-import { ICategory } from '@interfaces/category';
+import { AuserListEditComponent } from './edit/edit.component';
+import { AuserListAddComponent } from "./add/add.component";
+import { AuserService } from '../auser.service';
 import { NzMessageService } from 'ng-zorro-antd';
+import { IAuser } from '@interfaces/auser';
 
 @Component({
   selector: 'app-category-list',
   templateUrl: './list.component.html',
 })
-export class CategoryListComponent implements OnInit {
-  list: ICategory[];
+export class AuserListComponent implements OnInit {
+  list: IAuser[];
   total: number = 0;
   page: number = 1;
   size: number = 10;
@@ -37,21 +36,11 @@ export class CategoryListComponent implements OnInit {
       title: '操作',
       buttons: [
         { 
-          text: '查看',
-          icon: 'eye',
-          type: 'modal',
-          modal: {
-            component: CategoryListViewComponent,
-            params: record => record,
-            paramsName: 'record',
-          },
-        },
-        { 
           text: '编辑',
           icon: 'edit',
           type: 'modal',
           modal: {
-            component: CategoryListEditComponent,
+            component: AuserListEditComponent,
             params: record => record,
             paramsName: 'record',
           },
@@ -63,7 +52,7 @@ export class CategoryListComponent implements OnInit {
           icon: 'delete',
           type: 'del',
           click: (record, modal, comp) => {
-            this._categoryService.delCategory(record.id)
+            this._auserService.delAuser(record.id)
               .subscribe(res => {
                 console.log(res);
                 this.message.success(`成功删除【${record.name}】`);
@@ -105,7 +94,7 @@ export class CategoryListComponent implements OnInit {
   constructor(
     private http: _HttpClient,
     private modal: ModalHelper,
-    private _categoryService: CategoryService,
+    private _auserService: AuserService,
     private message: NzMessageService,
   ) { }
 
@@ -115,12 +104,12 @@ export class CategoryListComponent implements OnInit {
 
   add() {
     this.modal
-      .createStatic(CategoryListAddComponent, { record: { id: 0 } })
+      .createStatic(AuserListAddComponent, { record: { id: 0 } })
       .subscribe(() => this.st.reload());
   }
 
   getList(page = 1, size = 10) {
-    return this._categoryService.getCategoryList(page, size).subscribe(res => {
+    return this._auserService.getAuserList(page, size).subscribe(res => {
       console.log(res);
       let data = res.data;
       this.list = data.rows;
