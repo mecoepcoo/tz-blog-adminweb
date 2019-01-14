@@ -27,11 +27,12 @@ export class AuserListComponent implements OnInit {
       }
     }
   };
+
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
     { title: 'id', index: 'id', width: '200px' },
-    { title: '名称', index: 'name' },
-    { title: '数量', index: 'post_count', type: 'number', sort: true, width: '200px' },
+    { title: '用户名', index: 'user_name' },
+    { title: '状态', index: 'status' },
     {
       title: '操作',
       buttons: [
