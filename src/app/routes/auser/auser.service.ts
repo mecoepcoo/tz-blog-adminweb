@@ -24,10 +24,11 @@ export class AuserService {
   }
 
   /* 新增管理员 */
-  addAuser(name): Observable<IResponse> {
+  addAuser(name, pwd): Observable<IResponse> {
     let url = `${Config.apiUrl}ausers`;
     return this.http.post(url, {
       name: name,
+      pwd: pwd,
     });
   }
 

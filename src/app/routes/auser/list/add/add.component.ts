@@ -14,8 +14,8 @@ export class AuserListAddComponent implements OnInit {
   data: any;
   schema: SFSchema = {
     properties: {
-      post_count: {type: 'number', title: '文章数', default: 0, minimum: 0 },
-      name: { type: 'string', title: '名称', maxLength: 15 },
+      name: {type: 'string', title: '用户名', maxLength: 15 },
+      pwd: { type: 'string', title: '密码', maxLength: 15, minLength: 6 },
     },
     required: ['name'],
   };
@@ -24,11 +24,12 @@ export class AuserListAddComponent implements OnInit {
       spanLabelFixed: 100,
       grid: { span: 12 },
     },
-    $post_count: {
-      widget: 'number',
-    },
     $name: {
       widget: 'string',
+    },
+    $pwd: {
+      widget: 'string',
+      type: 'password',
     },
   };
 
@@ -45,7 +46,7 @@ export class AuserListAddComponent implements OnInit {
   }
 
   save(value: any) {
-    this._auserService.addAuser(value.name)
+    this._auserService.addAuser(value.name, value.pwd)
       .subscribe(res => {
         this.msgSrv.success('新建成功');
         this.modal.close(true);
