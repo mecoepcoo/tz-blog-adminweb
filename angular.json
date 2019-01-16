@@ -32,9 +32,11 @@
               }
             ],
             "styles": [
+              "node_modules/ngx-simplemde/src/index.css",
               "src/styles.less"
             ],
             "scripts": [
+              "node_modules/simplemde-antd/dist/simplemde.min.js",
               "node_modules/ajv/dist/ajv.bundle.js"
             ]
           },
