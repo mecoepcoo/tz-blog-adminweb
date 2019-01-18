@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { ICategory } from '@interfaces/category';
+import { IPost } from '@interfaces/post';
 import { IResponse } from '@interfaces/response';
 import { Config } from '@config/config';
 

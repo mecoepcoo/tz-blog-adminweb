@@ -4,7 +4,7 @@ import { STColumn, STComponent, STData } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { PostListAddComponent } from "./add/add.component";
 import { PostService } from '../post.service';
-import { ICategory } from '@interfaces/category';
+import { IPost } from '@interfaces/post';
 import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
@@ -12,7 +12,7 @@ import { NzMessageService } from 'ng-zorro-antd';
   templateUrl: './list.component.html',
 })
 export class PostListComponent implements OnInit {
-  list: ICategory[];
+  list: IPost[];
   total: number = 0;
   page: number = 1;
   size: number = 10;
@@ -29,8 +29,11 @@ export class PostListComponent implements OnInit {
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
     { title: 'id', index: 'id', width: '200px' },
-    { title: '名称', index: 'name' },
-    { title: '数量', index: 'post_count', type: 'number', sort: true, width: '200px' },
+    { title: '标题', index: 'title' },
+    { title: '作者', index: 'author' },
+    { title: '排序', index: 'order', type: 'number', width: '200px' },
+    { title: '阅读量', index: 'read_count', type: 'number', width: '200px' },
+    { title: '创建时间', index: 'create_time' },
     {
       title: '操作',
       buttons: [
