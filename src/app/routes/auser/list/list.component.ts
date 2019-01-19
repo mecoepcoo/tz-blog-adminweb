@@ -56,7 +56,7 @@ export class AuserListComponent implements OnInit {
             this._auserService.delAuser(record.id)
               .subscribe(res => {
                 console.log(res);
-                this.message.success(`成功删除【${record.name}】`);
+                this.message.success(`成功删除【${record.user_name}】`);
                 comp.removeRow(record);
               })
           }
