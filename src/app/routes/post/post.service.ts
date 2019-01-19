@@ -11,37 +11,37 @@ export class PostService {
     private http: HttpClient,
   ) { }
 
-  /* 获取分类列表 */
-  getCategoryList(page = 1, size = 10): Observable<IResponse> {
-    let url = `${Config.apiUrl}categories?page=${page}&size=${size}`;
+  /* 获取文章列表 */
+  getPostList(page = 1, size = 10): Observable<IResponse> {
+    let url = `${Config.apiUrl}posts?page=${page}&size=${size}`;
     return this.http.get(url);
   }
 
-  /* 获取分类 */
-  getCategory(id: number | string): Observable<IResponse> {
-    let url = `${Config.apiUrl}categories/${id}`;
+  /* 获取文章 */
+  getPost(id: number | string): Observable<IResponse> {
+    let url = `${Config.apiUrl}posts/${id}`;
     return this.http.get(url);
   }
 
-  /* 新增分类 */
-  addCategory(name): Observable<IResponse> {
-    let url = `${Config.apiUrl}categories`;
+  /* 新增文章 */
+  addPost(post): Observable<IResponse> {
+    let url = `${Config.apiUrl}posts`;
     return this.http.post(url, {
-      name: name,
+      post,
     });
   }
 
-  /* 修改分类 */
-  editCategory(id, name): Observable<IResponse> {
-    let url = `${Config.apiUrl}categories/${id}`;
+  /* 修改文章 */
+  editPost(id, post): Observable<IResponse> {
+    let url = `${Config.apiUrl}posts/${id}`;
     return this.http.put(url, {
-      name: name,
+      post,
     });
   }
 
-  /* 删除分类 */
-  delCategory(id): Observable<IResponse> {
-    let url = `${Config.apiUrl}categories/${id}`;
+  /* 删除文章 */
+  delPost(id): Observable<IResponse> {
+    let url = `${Config.apiUrl}posts/${id}`;
     return this.http.delete(url);
   }
 }

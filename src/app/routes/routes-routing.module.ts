@@ -28,6 +28,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent, data: { title: '仪表盘', titleI18n: 'dashboard' } },
       // 业务子模块
+      { path: 'post', loadChildren: './post/post.module#PostModule' },
       { path: 'category', loadChildren: './category/category.module#CategoryModule' },
       { path: 'tag', loadChildren: './tag/tag.module#TagModule' },
       { path: 'auser', loadChildren: './auser/auser.module#AuserModule' },

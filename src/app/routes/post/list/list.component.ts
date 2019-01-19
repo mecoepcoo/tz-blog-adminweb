@@ -37,7 +37,7 @@ export class PostListComponent implements OnInit {
     {
       title: '操作',
       buttons: [
-        { 
+        /* { 
           text: '查看',
           icon: 'eye',
           type: 'modal',
@@ -46,8 +46,8 @@ export class PostListComponent implements OnInit {
             params: record => record,
             paramsName: 'record',
           },
-        },
-        { 
+        }, */
+        /* { 
           text: '编辑',
           icon: 'edit',
           type: 'modal',
@@ -59,15 +59,15 @@ export class PostListComponent implements OnInit {
           click: (record: STData) => {
             this.refresh();
           }
-        },
+        }, */
         { 
           icon: 'delete',
           type: 'del',
           click: (record, modal, comp) => {
-            this._categoryService.delCategory(record.id)
+            this._postService.delPost(record.id)
               .subscribe(res => {
                 console.log(res);
-                this.message.success(`成功删除【${record.name}】`);
+                this.message.success(`成功删除【${record.title}】`);
                 comp.removeRow(record);
               })
           }
@@ -121,7 +121,7 @@ export class PostListComponent implements OnInit {
   }
 
   getList(page = 1, size = 10) {
-    return this._postService.getCategoryList(page, size).subscribe(res => {
+    return this._postService.getPostList(page, size).subscribe(res => {
       console.log(res);
       let data = res.data;
       this.list = data.rows;
