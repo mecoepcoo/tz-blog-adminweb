@@ -7,9 +7,9 @@ import { PostListAddComponent } from "./list/add/add.component";
 import { PostService } from './post.service';
 
 const COMPONENTS = [
-  PostListComponent];
-const COMPONENTS_NOROUNT = [
+  PostListComponent,
   PostListAddComponent];
+const COMPONENTS_NOROUNT = [];
 
 @NgModule({
   imports: [
