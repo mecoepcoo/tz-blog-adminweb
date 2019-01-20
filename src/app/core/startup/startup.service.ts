@@ -60,7 +60,7 @@ export class StartupService {
     });
   }
   
-  private viaMock(resolve: any, reject: any) {
+  private getInitInfo(resolve: any, reject: any) {
     // const tokenData = this.tokenService.get();
     // if (!tokenData.token) {
     //   this.injector.get(Router).navigateByUrl('/passport/login');
@@ -70,13 +70,13 @@ export class StartupService {
     // mock
     const app: any = {
       name: `tz-blog`,
-      description: `Ng-zorro admin panel front-end framework`
+      description: `天真的博客`
     };
     const user: any = {
       name: 'Admin',
       avatar: './assets/tmp/img/avatar.jpg',
-      email: 'cipchk@qq.com',
-      token: '123456789'
+      email: 'mecoepcoo@vip.qq.com',
+      token: 'token'
     };
     // 应用信息：包括站点名、描述、年份
     this.settingService.setApp(app);
@@ -164,7 +164,7 @@ export class StartupService {
       // http
       // this.viaHttp(resolve, reject);
       // mock：请勿在生产环境中这么使用，viaMock 单纯只是为了模拟一些数据使脚手架一开始能正常运行
-      this.viaMock(resolve, reject);
+      this.getInitInfo(resolve, reject);
 
     });
   }
