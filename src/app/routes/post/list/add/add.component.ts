@@ -10,6 +10,19 @@ import { PostService } from "../../post.service";
   templateUrl: './add.component.html',
 })
 export class PostListAddComponent implements OnInit {
+  addSchema: SFSchema = {
+    properties: {
+      title: {
+        type: 'string',
+        title: '标题',
+      },
+      author: {
+        type: 'string',
+        title: '作者',
+      },
+      
+    }
+  };
   
   constructor(
     private msgSrv: NzMessageService,

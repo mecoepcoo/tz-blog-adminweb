@@ -1,4 +1,4 @@
 <page-header [title]="'新建文章'"></page-header>
 <nz-card>
-  
+  <sf mode="edit" [schema]="addSchema" (formSubmit)="add($event)"></sf>
 </nz-card>
