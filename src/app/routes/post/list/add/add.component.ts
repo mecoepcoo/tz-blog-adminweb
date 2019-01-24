@@ -20,7 +20,10 @@ export class PostListAddComponent implements OnInit {
         type: 'string',
         title: '作者',
       },
-      
+      category: {
+        type: 'string',
+        title: '分类',
+      }
     }
   };
   
