@@ -23,7 +23,33 @@ export class PostListAddComponent implements OnInit {
       category: {
         type: 'string',
         title: '分类',
+      },
+      tags: {
+        type: 'string',
+        title: '标签',
+        enum: [],
       }
+    }
+  };
+
+  ui: SFUISchema = {
+    '*': {
+      spanLabelFixed: 100,
+      grid: { span: 12 },
+    },
+    $title: {
+      widget: 'string',
+    },
+    $author: {
+      widget: 'string',
+      default: 'Tianzhen',
+    },
+    $category: {
+      widget: 'select',
+    },
+    $tags: {
+      widget: 'checkbox',
+      span: 8,
     }
   };
   
