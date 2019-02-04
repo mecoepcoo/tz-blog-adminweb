@@ -48,9 +48,7 @@ const routes: Routes = [
     path: 'passport',
     component: LayoutPassportComponent,
     children: [
-      { path: 'login', component: UserLoginComponent, data: { title: '登录', titleI18n: 'pro-login' } },
-      { path: 'register', component: UserRegisterComponent, data: { title: '注册', titleI18n: 'pro-register' } },
-      { path: 'register-result', component: UserRegisterResultComponent, data: { title: '注册结果', titleI18n: 'pro-register-result' } }
+      { path: 'login', component: UserLoginComponent, data: { title: '登录', titleI18n: '登录' } },
     ]
   },
   // 单页不包裹Layout

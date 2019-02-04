@@ -69,14 +69,13 @@ export class StartupService {
     // }
     // mock
     const app: any = {
-      name: `tz-blog`,
+      name: `tz小海螺`,
       description: `天真的博客`
     };
     const user: any = {
-      name: 'Admin',
-      avatar: './assets/tmp/img/avatar.jpg',
+      name: 'Tianzhen',
+      avatar: './assets/avatar.jpg',
       email: 'mecoepcoo@vip.qq.com',
-      token: 'token'
     };
     // 应用信息：包括站点名、描述、年份
     this.settingService.setApp(app);
