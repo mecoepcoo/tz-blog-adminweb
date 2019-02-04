@@ -12,6 +12,7 @@ import { environment } from '@env/environment';
 import { StartupService } from '@core/startup/startup.service';
 import { HttpClient } from '@angular/common/http';
 import { Config } from '@config/config';
+import { TokenService } from '@shared/token.service';
 
 @Component({
   selector: 'passport-login',
@@ -37,6 +38,7 @@ export class UserLoginComponent implements OnInit, OnDestroy {
     // @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
     private startupSrv: StartupService,
     public http: HttpClient,
+    private tokenSrv: TokenService,
   ) {
     this.form = fb.group({
       userName: [null, [Validators.required, Validators.minLength(5)]],
@@ -92,6 +94,8 @@ export class UserLoginComponent implements OnInit, OnDestroy {
         //   this.error = res.msg;
         //   return;
         // }
+        // 保存token
+        this.tokenSrv.setToken(res.data.token);
         // 清空路由复用信息
         this.reuseTabService.clear();
         this.startupSrv.load().then(() => this.router.navigate(['/']));

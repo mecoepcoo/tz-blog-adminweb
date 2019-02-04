@@ -10,6 +10,7 @@ import {
   HttpProgressEvent,
   HttpResponse,
   HttpUserEvent,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { mergeMap, catchError } from 'rxjs/operators';
@@ -17,12 +18,17 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { environment } from '@env/environment';
 
+import { TokenService } from '@shared/token.service';
+
 /**
  * 默认HTTP拦截器，其注册细节见 `app.module.ts`
  */
 @Injectable()
 export class DefaultInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {}
+  constructor(
+    private injector: Injector,
+    private tokenSrv: TokenService,
+  ) {}
 
   get msg(): NzMessageService {
     return this.injector.get(NzMessageService);
@@ -62,7 +68,7 @@ export class DefaultInterceptor implements HttpInterceptor {
         // }
         break;
       case 401: // 未登录状态码
-        this.goTo('/passport/login');
+        this.goTo('/tianzhen/login');
         break;
       // case 403:
       case 404:
@@ -100,9 +106,11 @@ export class DefaultInterceptor implements HttpInterceptor {
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
       url = environment.SERVER_URL + url;
     }
-
     const newReq = req.clone({
       url: url,
+      headers: new HttpHeaders({
+        Authorization: this.tokenSrv.token,
+      }),
     });
     return next.handle(newReq).pipe(
       mergeMap((event: any) => {

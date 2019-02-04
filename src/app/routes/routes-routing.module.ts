@@ -10,8 +10,6 @@ import { LayoutPassportComponent } from '../layout/passport/passport.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 // passport pages
 import { UserLoginComponent } from './passport/login/login.component';
-import { UserRegisterComponent } from './passport/register/register.component';
-import { UserRegisterResultComponent } from './passport/register-result/register-result.component';
 // single pages
 import { CallbackComponent } from './callback/callback.component';
 import { UserLockComponent } from './passport/lock/lock.component';
@@ -45,7 +43,7 @@ const routes: Routes = [
   // },
   // passport
   {
-    path: 'passport',
+    path: 'tianzhen',
     component: LayoutPassportComponent,
     children: [
       { path: 'login', component: UserLoginComponent, data: { title: '登录', titleI18n: '登录' } },
