@@ -25,7 +25,7 @@
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzSize="large">
-            <div class="captcha-img" #pCaptcha></div>
+            <div class="captcha-img" #pCaptcha (click)="getCaptcha()"></div>
           </nz-input-group>
           <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-lock">
             <input nz-input type="text" formControlName="captcha" placeholder="captcha">

@@ -13,7 +13,7 @@ import { throwIfAlreadyLoaded } from '@core/module-import-guard';
 import { AlainThemeModule } from '@delon/theme';
 import { DelonABCModule, STConfig } from '@delon/abc';
 import { DelonChartModule } from '@delon/chart';
-import { DelonAuthModule } from '@delon/auth';
+// import { DelonAuthModule } from '@delon/auth';
 import { DelonACLModule } from '@delon/acl';
 import { DelonCacheModule } from '@delon/cache';
 import { DelonUtilModule } from '@delon/util';
@@ -84,7 +84,7 @@ const GLOBAL_CONFIG_PROVIDES = [
     AlainThemeModule.forRoot(),
     DelonABCModule.forRoot(),
     DelonChartModule.forRoot(),
-    DelonAuthModule.forRoot(),
+    // DelonAuthModule.forRoot(),
     DelonACLModule.forRoot(),
     DelonCacheModule.forRoot(),
     DelonUtilModule.forRoot(),

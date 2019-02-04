@@ -3,10 +3,10 @@ import { Component, OnDestroy, Inject, Optional, OnInit, ViewChild } from '@angu
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
-import {
-  TokenService,
-  DA_SERVICE_TOKEN,
-} from '@delon/auth';
+// import {
+  // TokenService,
+  // DA_SERVICE_TOKEN,
+// } from '@delon/auth';
 import { ReuseTabService } from '@delon/abc';
 import { environment } from '@env/environment';
 import { StartupService } from '@core/startup/startup.service';
@@ -34,7 +34,7 @@ export class UserLoginComponent implements OnInit, OnDestroy {
     @Optional()
     @Inject(ReuseTabService)
     private reuseTabService: ReuseTabService,
-    @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
+    // @Inject(DA_SERVICE_TOKEN) private tokenService: TokenService,
     private startupSrv: StartupService,
     public http: HttpClient,
   ) {
@@ -54,9 +54,6 @@ export class UserLoginComponent implements OnInit, OnDestroy {
   get password() {
     return this.form.controls.password;
   }
-  get mobile() {
-    return this.form.controls.mobile;
-  }
   get captcha() {
     return this.form.controls.captcha;
   }
@@ -65,8 +62,7 @@ export class UserLoginComponent implements OnInit, OnDestroy {
 
   // 获取图形验证码
   getCaptcha() {
-    this.http.get(`${Config.apiUrl}login/captcha`).subscribe((data: any) => {
-      console.log(data);
+    this.http.get(`${Config.apiUrl}login/captcha`, {withCredentials: true}).subscribe((data: any) => {
       this.pCaptcha.nativeElement.innerHTML = data.data;
     });
   }
@@ -79,26 +75,33 @@ export class UserLoginComponent implements OnInit, OnDestroy {
     this.userName.updateValueAndValidity();
     this.password.markAsDirty();
     this.password.updateValueAndValidity();
-    if (this.userName.invalid || this.password.invalid) return;
+    this.captcha.markAsDirty();
+    this.captcha.updateValueAndValidity();
+    if (this.userName.invalid || this.password.invalid || this.captcha.invalid) return;
 
     // 默认配置中对所有HTTP请求都会强制 [校验](https://ng-alain.com/auth/getting-started) 用户 Token
     // 然一般来说登录请求不需要校验，因此可以在请求URL加上：`/login?_allow_anonymous=true` 表示不触发用户 Token 校验
     this.http
-      .post('/login/account?_allow_anonymous=true', {
-        userName: this.userName.value,
-        password: this.password.value,
-      })
+      .post(`${Config.apiUrl}login`, {
+        username: this.userName.value,
+        pwd: this.password.value,
+        captcha: this.captcha.value,
+      }, {withCredentials: true})
       .subscribe((res: any) => {
-        if (res.msg !== 'ok') {
-          this.error = res.msg;
-          return;
-        }
+        // if (res.msg !== 'ok') {
+        //   this.error = res.msg;
+        //   return;
+        // }
         // 清空路由复用信息
         this.reuseTabService.clear();
-        // 设置用户Token信息
-        this.tokenService.set(res.user);
-        // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
         this.startupSrv.load().then(() => this.router.navigate(['/']));
+        // 设置用户Token信息
+        // this.tokenService.set(res.user);
+        // 重新获取 StartupService 内容，我们始终认为应用信息一般都会受当前用户授权范围而影响
+        // this.startupSrv.load().then(() => this.router.navigate(['/']));
+      }, (err: any) => {
+        this.error = err.errMsg;
+        this.getCaptcha();
       });
   }
   // #endregion

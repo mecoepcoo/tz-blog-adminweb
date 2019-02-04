@@ -38,6 +38,7 @@ export class DefaultInterceptor implements HttpInterceptor {
     // 可能会因为 `throw` 导出无法执行 `_HttpClient` 的 `end()` 操作
     this.injector.get(_HttpClient).end();
     // 业务处理：一些通用操作
+    console.log(event);
     switch (event.status) {
       case 200:
         // 业务层级错误处理，以下是假定restful有一套统一输出格式（指不管成功与否都有相应的数据格式）情况下进行处理
@@ -63,12 +64,15 @@ export class DefaultInterceptor implements HttpInterceptor {
       case 401: // 未登录状态码
         this.goTo('/passport/login');
         break;
-      case 403:
+      // case 403:
       case 404:
       case 500:
         this.goTo(`/${event.status}`);
         break;
       default:
+        if (event.status === 403 || event.status === 405) {
+          throw((<any>event).error);
+        }
         if (event instanceof HttpErrorResponse) {
           console.warn(
             '未可知错误，大部分是由于后端不支持CORS或无效配置引起',
