@@ -33,7 +33,7 @@ export class PostListComponent implements OnInit {
     { title: '作者', index: 'author' },
     { title: '排序', index: 'order', type: 'number', width: '200px' },
     { title: '阅读量', index: 'read_count', type: 'number', width: '200px' },
-    { title: '创建时间', index: 'create_time' },
+    { title: '创建时间', index: 'created_at', type: 'date' },
     {
       title: '操作',
       buttons: [
@@ -122,7 +122,6 @@ export class PostListComponent implements OnInit {
 
   getList(page = 1, size = 10) {
     return this._postService.getPostList(page, size).subscribe(res => {
-      console.log(res);
       let data = res.data;
       this.list = data.rows;
       this.total = data.count;
