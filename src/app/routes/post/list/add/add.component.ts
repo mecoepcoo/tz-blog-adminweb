@@ -27,15 +27,20 @@ export class PostListAddComponent implements OnInit {
       tags: {
         type: 'string',
         title: '标签',
-        enum: [],
+        enum: ['1', '2', '3'],
+      },
+      content: {
+        type: 'string',
+        title: '正文',
       }
     }
   };
 
   ui: SFUISchema = {
     '*': {
-      spanLabelFixed: 100,
-      grid: { span: 12 },
+      spanLabel: 1,
+      spanControl: 23,
+      // grid: { span: 4 },
     },
     $title: {
       widget: 'string',
@@ -49,7 +54,9 @@ export class PostListAddComponent implements OnInit {
     },
     $tags: {
       widget: 'checkbox',
-      span: 8,
+    },
+    $content: {
+      widget: 'md',
     }
   };
   

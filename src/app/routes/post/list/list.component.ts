@@ -6,6 +6,7 @@ import { PostListAddComponent } from "./add/add.component";
 import { PostService } from '../post.service';
 import { IPost } from '@interfaces/post';
 import { NzMessageService } from 'ng-zorro-antd';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
@@ -108,6 +109,7 @@ export class PostListComponent implements OnInit {
     private modal: ModalHelper,
     private _postService: PostService,
     private message: NzMessageService,
+    private router: Router,
   ) { }
 
   ngOnInit() { 
@@ -115,9 +117,7 @@ export class PostListComponent implements OnInit {
   }
 
   add() {
-    this.modal
-      .createStatic(PostListAddComponent, { record: { id: 0 } })
-      .subscribe(() => this.st.reload());
+    this.router.navigate(['/post/add']);
   }
 
   getList(page = 1, size = 10) {
