@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
+import { StorageService } from '@shared/storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenService {
-  constructor() { }
+  constructor(
+    private storageSrv: StorageService,
+  ) { }
 
-  token = '';
+  token: string = this.storageSrv.token;
 
   setToken(token) {
     this.token = 'JwtUser ' + token;
