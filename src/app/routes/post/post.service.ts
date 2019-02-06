@@ -24,10 +24,17 @@ export class PostService {
   }
 
   /* 新增文章 */
-  addPost(post): Observable<IResponse> {
+  addPost(title, author, postContent, order, categoryId, tagIds): Observable<IResponse> {
     let url = `${Config.apiUrl}posts`;
     return this.http.post(url, {
-      post,
+      title: title,
+      author: author,
+      postContent: postContent,
+      order: order,
+      categoryId: categoryId,
+      tagIds: tagIds,
+      status: 1,
+      readCount: 0,
     });
   }
 
