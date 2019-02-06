@@ -1,0 +1,4 @@
+<page-header [title]="'修改文章'"></page-header>
+<nz-card>
+  <sf mode="edit" [schema]="editSchema" #sf [ui]="ui" (formSubmit)="save($event)"></sf>
+</nz-card>

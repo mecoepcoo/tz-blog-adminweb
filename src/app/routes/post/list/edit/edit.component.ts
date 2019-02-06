@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
+import { ActivatedRoute, Router } from '@angular/router';
 import { _HttpClient } from '@delon/theme';
-import { SFSchema, SFUISchema, SFSchemaEnumType } from '@delon/form';
-import { of, from, Observable } from 'rxjs';
+import { SFSchema, SFUISchema, SFSchemaEnumType, SFComponent } from '@delon/form';
+import { IPost } from '@interfaces/post';
 import { map } from 'rxjs/operators'
 
 import { PostService } from '../../post.service';
@@ -10,16 +11,25 @@ import { CategoryService } from '../../../category/category.service';
 import { TagService } from '../../../tag/tag.service';
 
 @Component({
-  selector: 'app-post-list-add',
-  templateUrl: './add.component.html',
+  selector: 'app-post-list-edit',
+  templateUrl: './edit.component.html',
   providers: [
     CategoryService,
     TagService,
   ],
 })
-export class PostListAddComponent implements OnInit {
-  addSchema: SFSchema = {
+export class PostListEditComponent implements OnInit {
+  @ViewChild('sf') sf: SFComponent;
+  id: string;
+  post: IPost;
+
+  editSchema: SFSchema = {
     properties: {
+      id: {
+        type: 'string',
+        title: 'id',
+        readOnly: true,
+      },
       title: {
         type: 'string',
         title: '标题',
@@ -32,7 +42,6 @@ export class PostListAddComponent implements OnInit {
       order: {
         type: 'number',
         title: '排序',
-        default: '0',
       },
       category: {
         type: 'string',
@@ -55,6 +64,9 @@ export class PostListAddComponent implements OnInit {
     '*': {
       spanLabel: 2,
       spanControl: 22,
+    },
+    $id: {
+      widget: 'text',
     },
     $title: {
       widget: 'string',
@@ -80,6 +92,8 @@ export class PostListAddComponent implements OnInit {
   
   constructor(
     private msgSrv: NzMessageService,
+    private route: ActivatedRoute,
+    private router: Router,
     public http: _HttpClient,
     private _postService: PostService,
     private _categoryService: CategoryService,
@@ -87,6 +101,8 @@ export class PostListAddComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.id = this.route.snapshot.paramMap.get('id') || '';
+    this.getPost(this.id);
   }
 
   save(value: any) {
@@ -95,9 +111,10 @@ export class PostListAddComponent implements OnInit {
     content = content.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>').replace(/\s/g, ' ');
     this._postService.addPost(title, author, content, order, category, tags)
       .subscribe(res => {
-        this.msgSrv.success('新建成功');
+        this.msgSrv.success('修改成功');
+        this.router.navigate(['/post/list']);
       }, err => {
-        this.msgSrv.error('新建失败');
+        this.msgSrv.error('修改失败');
       });
   }
 
@@ -133,5 +150,31 @@ export class PostListAddComponent implements OnInit {
           return tagsList;
         })
       );
+  }
+
+  getPost(id) {
+    this._postService.getPost(id).subscribe(data => {
+      let post = data.data;
+      this.post = {
+        id: post.id,
+        title: post.title,
+        author: post.author,
+        post_content: post.post_content,
+        status: post.status,
+        order: post.order,
+        read_count: post.read_count,
+      };
+      this.editSchema.properties.id.default = post.id;
+      this.editSchema.properties.title.default = post.title;
+      this.editSchema.properties.author.default = post.author;
+      let content = post.post_content.replace(/\<br\>/g, '\n');
+      this.editSchema.properties.content.default = content;
+      this.editSchema.properties.order.default = post.order;
+      this.editSchema.properties.category.default = post.category.id;
+      let tags = [];
+      post.tags.forEach(tag => tags.push(tag.id));
+      this.editSchema.properties.tags.default = tags;
+      this.sf.refreshSchema();
+    })
   }
 }

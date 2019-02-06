@@ -2,13 +2,15 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared/shared.module';
 import { PostRoutingModule } from './post-routing.module';
 import { PostListComponent } from './list/list.component';
-import { PostListAddComponent } from "./list/add/add.component";
+import { PostListAddComponent } from './list/add/add.component';
+import { PostListEditComponent } from './list/edit/edit.component';
 
 import { PostService } from './post.service';
 
 const COMPONENTS = [
   PostListComponent,
-  PostListAddComponent];
+  PostListAddComponent,
+  PostListEditComponent];
 const COMPONENTS_NOROUNT = [];
 
 @NgModule({

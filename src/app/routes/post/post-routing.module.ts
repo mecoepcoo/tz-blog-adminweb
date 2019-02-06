@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PostListComponent } from './list/list.component';
 import { PostListAddComponent } from './list/add/add.component';
+import { PostListEditComponent } from './list/edit/edit.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
     path: 'add',
     component: PostListAddComponent,
     data: { title: '新增文章' },
+  },
+  {
+    path: 'edit/:id',
+    component: PostListEditComponent,
+    data: { title: '修改文章' },
   },
   {
     path: '',

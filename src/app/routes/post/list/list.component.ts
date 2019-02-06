@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent, STData } from '@delon/abc';
 import { SFSchema } from '@delon/form';
-import { PostListAddComponent } from "./add/add.component";
 import { PostService } from '../post.service';
 import { IPost } from '@interfaces/post';
 import { NzMessageService } from 'ng-zorro-antd';
@@ -48,19 +47,14 @@ export class PostListComponent implements OnInit {
             paramsName: 'record',
           },
         }, */
-        /* { 
+        { 
           text: '编辑',
           icon: 'edit',
-          type: 'modal',
-          modal: {
-            component: PostListEditComponent,
-            params: record => record,
-            paramsName: 'record',
-          },
+          type: 'link',
           click: (record: STData) => {
-            this.refresh();
+            this.router.navigate(['/post/edit', record.id]);
           }
-        }, */
+        },
         { 
           icon: 'delete',
           type: 'del',
