@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema, SFSchemaEnumType } from '@delon/form';
-import { of, from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators'
+import { Router } from "@angular/router";
 
 import { PostService } from '../../post.service';
 import { CategoryService } from '../../../category/category.service';
@@ -84,6 +84,7 @@ export class PostListAddComponent implements OnInit {
     private _postService: PostService,
     private _categoryService: CategoryService,
     private _tagService: TagService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -96,6 +97,7 @@ export class PostListAddComponent implements OnInit {
     this._postService.addPost(title, author, content, order, category, tags)
       .subscribe(res => {
         this.msgSrv.success('新建成功');
+        this.router.navigate(['/post/list']);
       }, err => {
         this.msgSrv.error('新建失败');
       });
