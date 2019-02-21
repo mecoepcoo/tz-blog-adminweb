@@ -108,8 +108,8 @@ export class PostListEditComponent implements OnInit {
   save(value: any) {
     let { title, author, order, category, tags, content } = value;
     tags = JSON.stringify(tags);
-    content = content.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>').replace(/\s/g, ' ');
-    this._postService.addPost(title, author, content, order, category, tags)
+    // content = content.replace(/\r\n/g, '\r\n').replace(/[^\r]\n/g, '\r\n').replace(/\s/g, ' ');
+    this._postService.editPost(this.id, title, author, content, order, category, tags)
       .subscribe(res => {
         this.msgSrv.success('修改成功');
         this.router.navigate(['/post/list']);
