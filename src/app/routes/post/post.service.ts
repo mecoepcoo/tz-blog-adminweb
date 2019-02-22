@@ -24,10 +24,11 @@ export class PostService {
   }
 
   /* 新增文章 */
-  addPost(title: string, author: string, postContent: string, order, categoryId, tagIds): Observable<IResponse> {
+  addPost(title: string, summary: string, author: string, postContent: string, order, categoryId, tagIds): Observable<IResponse> {
     let url = `${Config.apiUrl}posts`;
     return this.http.post(url, {
       title: title,
+      summary: summary,
       author: author,
       postContent: postContent,
       order: order,
@@ -39,10 +40,11 @@ export class PostService {
   }
 
   /* 修改文章 */
-  editPost(id, title: string, author: string, postContent: string, order, categoryId, tagIds): Observable<IResponse> {
+  editPost(id, title: string, summary: string, author: string, postContent: string, order, categoryId, tagIds): Observable<IResponse> {
     let url = `${Config.apiUrl}posts/${id}`;
     return this.http.put(url, {
       title: title,
+      summary: summary,
       author: author,
       postContent: postContent,
       order: order,

@@ -34,6 +34,10 @@ export class PostListEditComponent implements OnInit {
         type: 'string',
         title: '标题',
       },
+      summary: {
+        type: 'string',
+        title: '摘要',
+      },
       author: {
         type: 'string',
         title: '作者',
@@ -57,7 +61,7 @@ export class PostListEditComponent implements OnInit {
         title: '正文',
       },
     },
-    required: ['title', 'author', 'category', 'tags', 'order'],
+    required: ['title', 'summary', 'author', 'category', 'tags', 'order'],
   };
 
   ui: SFUISchema = {
@@ -69,6 +73,9 @@ export class PostListEditComponent implements OnInit {
       widget: 'text',
     },
     $title: {
+      widget: 'string',
+    },
+    $summary: {
       widget: 'string',
     },
     $author: {
@@ -106,10 +113,10 @@ export class PostListEditComponent implements OnInit {
   }
 
   save(value: any) {
-    let { title, author, order, category, tags, content } = value;
+    let { title, summary, author, order, category, tags, content } = value;
     tags = JSON.stringify(tags);
     // content = content.replace(/\r\n/g, '\r\n').replace(/[^\r]\n/g, '\r\n').replace(/\s/g, ' ');
-    this._postService.editPost(this.id, title, author, content, order, category, tags)
+    this._postService.editPost(this.id, title, summary, author, content, order, category, tags)
       .subscribe(res => {
         this.msgSrv.success('修改成功');
         this.router.navigate(['/post/list']);
@@ -160,12 +167,14 @@ export class PostListEditComponent implements OnInit {
         title: post.title,
         author: post.author,
         post_content: post.post_content,
+        summary: post.summary,
         status: post.status,
         order: post.order,
         read_count: post.read_count,
       };
       this.editSchema.properties.id.default = post.id;
       this.editSchema.properties.title.default = post.title;
+      this.editSchema.properties.summary.default = post.summary;
       this.editSchema.properties.author.default = post.author;
       let content = post.post_content.replace(/\<br\>/g, '\n');
       this.editSchema.properties.content.default = content;

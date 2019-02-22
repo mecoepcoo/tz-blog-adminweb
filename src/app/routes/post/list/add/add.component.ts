@@ -24,6 +24,10 @@ export class PostListAddComponent implements OnInit {
         type: 'string',
         title: '标题',
       },
+      summary: {
+        type: 'string',
+        title: '摘要',
+      },
       author: {
         type: 'string',
         title: '作者',
@@ -48,7 +52,7 @@ export class PostListAddComponent implements OnInit {
         title: '正文',
       },
     },
-    required: ['title', 'author', 'category', 'tags', 'order'],
+    required: ['title', 'summary', 'author', 'category', 'tags', 'order'],
   };
 
   ui: SFUISchema = {
@@ -57,6 +61,9 @@ export class PostListAddComponent implements OnInit {
       spanControl: 22,
     },
     $title: {
+      widget: 'string',
+    },
+    $summary: {
       widget: 'string',
     },
     $author: {
@@ -91,10 +98,10 @@ export class PostListAddComponent implements OnInit {
   }
 
   save(value: any) {
-    let { title, author, order, category, tags, content } = value;
+    let { title, summary, author, order, category, tags, content } = value;
     tags = JSON.stringify(tags);
     content = content.replace(/\r\n/g, '\r\n').replace(/[^\r]\n/g, '\r\n').replace(/\s/g, ' ');
-    this._postService.addPost(title, author, content, order, category, tags)
+    this._postService.addPost(title, summary, author, content, order, category, tags)
       .subscribe(res => {
         this.msgSrv.success('新建成功');
         this.router.navigate(['/post/list']);
