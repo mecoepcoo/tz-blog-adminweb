@@ -100,7 +100,6 @@ export class PostListAddComponent implements OnInit {
   save(value: any) {
     let { title, summary, author, order, category, tags, content } = value;
     tags = JSON.stringify(tags);
-    content = content.replace(/\r\n/g, '\r\n').replace(/[^\r]\n/g, '\r\n').replace(/\s/g, ' ');
     this._postService.addPost(title, summary, author, content, order, category, tags)
       .subscribe(res => {
         this.msgSrv.success('新建成功');
